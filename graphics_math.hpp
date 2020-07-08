@@ -21,23 +21,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 #include <ostream>
 
+// vec2 implementation
 namespace graphics_math
 {
   template<typename T>
   union vec2
   {
-  public:
-    T data[2] = {0, 0};
+    T data[2] = { 0, 0 };
     struct { T x, y; };
     struct { T width, height; };
 
     inline vec2(const T& uniform) : x(uniform), y(uniform) {}
     inline vec2(const T& x, const T& y) : x(x), y(y) {}
     inline vec2(const vec2& rhs) : x(rhs.x), y(rhs.y) {}
-
-    inline T& operator[](const size_t index) noexcept(false) { if (index > 1) throw "index out of bound!"; return data[index]; }
 
     inline const vec2 operator+(const vec2& rhs) const { return { x + rhs.x, y + rhs.y }; }
     inline const vec2 operator-(const vec2& rhs) const { return { x - rhs.x, y - rhs.y }; }
@@ -51,11 +50,14 @@ namespace graphics_math
     inline vec2& operator*=(const    T& rhs) { x *= rhs; y *= rhs; return *this; }
     inline vec2& operator/=(const vec2& rhs) { x /= rhs.x; y /= rhs.y; return *this; }
 
-    inline const T    dot(const vec2& rhs) const { return x * rhs.x + y * rhs.y; }
-    inline const T    length_squared() const     { return dot(*this); }
-    inline const T    length() const             { return sqrt(length_squared()); }
-    inline vec2&      normalize()                { return *this /= length(); }
-    inline const vec2 normalized() const         { return vec2(*this) /= length(); }
+    inline         T& operator[](const size_t index) noexcept(false) { if (index > 1) throw "index out of bound!"; return data[index]; }
+    inline const vec2                    operator-()           const { return { -x, -y }; }
+
+    inline    const T dot(const vec2& rhs) const { return x * rhs.x + y * rhs.y; }
+    inline    const T     length_squared() const { return dot(*this); }
+    inline    const T             length() const { return sqrt(length_squared()); }
+    inline      vec2&          normalize()       { return *this /= length(); }
+    inline const vec2         normalized() const { return vec2(*this) /= length(); }
 
     template <template<typename> class U, typename V>
     inline explicit operator U<V>() const { return { (V)x, (V)y }; }
@@ -69,4 +71,55 @@ namespace graphics_math
 
   using fvec2 = vec2<float>;
   using ivec2 = vec2<int>;
+}
+
+// vec3 implementation
+namespace graphics_math
+{
+  template<typename T>
+  union vec3
+  {
+    T data[3] = { 0, 0 };
+    struct { T x, y, z; };
+    struct { T r, g, b; };
+
+    inline vec3(const T& uniform) : x(uniform), y(uniform), z(uniform) {}
+    inline vec3(const T& x, const T& y, const T& z) : x(x), y(y), z(z) {}
+    inline vec3(const vec3& rhs) : x(rhs.x), y(rhs.y), z(rhs.z) {}
+  
+    inline const vec3 operator+(const vec3& rhs) const { return { x + rhs.x, y + rhs.y, z + rhs.z }; }
+    inline const vec3 operator-(const vec3& rhs) const { return { x - rhs.x, y - rhs.y, z - rhs.z }; }
+    inline const vec3 operator*(const    T& rhs) const { return { x * rhs, y * rhs, z * rhs }; }
+    inline const vec3 operator*(const vec3& rhs) const { return { x * rhs.x, y * rhs.y, z * rhs.z }; }
+    inline const vec3 operator/(const    T& rhs) const { return { x / rhs, y / rhs, z / rhs }; }
+
+    inline vec3& operator+=(const vec3& rhs) { x += rhs.x; y += rhs.y; z += rhs.z; return *this; }
+    inline vec3& operator-=(const vec3& rhs) { x -= rhs.x; y -= rhs.y; z -= rhs.z; return *this; }
+    inline vec3& operator*=(const vec3& rhs) { x *= rhs.x; y *= rhs.y; z *= rhs.z; return *this; }
+    inline vec3& operator*=(const    T& rhs) { x *= rhs; y *= rhs; z *= rhs; return *this; }
+    inline vec3& operator/=(const vec3& rhs) { x /= rhs.x; y /= rhs.y; z /= rhs.z; return *this; }
+
+    inline         T& operator[](const size_t index) noexcept(false) { if (index > 2) throw "index out of bound!"; return data[index]; }
+    inline const vec3                    operator-()           const { return { -x, -y, -z }; }
+
+    inline    const T   dot(const vec3& rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
+    inline const vec3 cross(const vec3& rhs) const { return { y * rhs.z - z * rhs.y, z * rhs.x - x * rhs.z, x * rhs.y - y * rhs.x}; }
+    inline    const T       length_squared() const { return dot(*this); }
+    inline    const T               length() const { return sqrt(length_squared()); }
+    inline      vec3&            normalize()       { return *this /= length(); }
+    inline const vec3           normalized() const { return vec3(*this) /= length(); }
+
+    template <template<typename> class U, typename V>
+    inline explicit operator U<V>() const { return { (V)x, (V)y, (V)z }; }
+  };
+
+
+  template<typename T>
+  inline std::ostream& operator<<(std::ostream& os, const vec3<T>& rhs)
+  {
+    return os << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+  }
+
+  using fvec3 = vec3<float>;
+  using ivec3 = vec3<int>;
 }
