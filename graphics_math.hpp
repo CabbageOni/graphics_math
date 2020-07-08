@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 Sukjun Park
+Copyright (c) 2020 Johnny Park
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-union vec2
+namespace graphics_math
 {
-};
+  union vec2
+  {
+    float data[2] = {0, 0};
+    struct { float x, y; };
+  };
+
+  union ivec2
+  {
+    int data[2] = {0, 0};
+    struct { int x, y; };
+    struct { int width, height; };
+  };
+}
