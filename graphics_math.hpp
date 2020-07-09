@@ -34,6 +34,7 @@ namespace graphics_math
     struct { T x, y; };
     struct { T width, height; };
 
+    inline vec2() {}
     inline vec2(const T& uniform) : x(uniform), y(uniform) {}
     inline vec2(const T& x, const T& y) : x(x), y(y) {}
     inline vec2(const vec2& rhs) : x(rhs.x), y(rhs.y) {}
@@ -49,6 +50,9 @@ namespace graphics_math
     inline vec2& operator*=(const vec2& rhs) { x *= rhs.x; y *= rhs.y; return *this; }
     inline vec2& operator*=(const    T& rhs) { x *= rhs; y *= rhs; return *this; }
     inline vec2& operator/=(const    T& rhs) { x /= rhs; y /= rhs; return *this; }
+
+    inline const bool operator==(const vec2& rhs) const { return x == rhs.x && y == rhs.y; }
+    inline const bool operator!=(const vec2& rhs) const { return x != rhs.x || y != rhs.y; }
 
     inline         T& operator[](const size_t index) noexcept(false) { if (index > 1) throw "index out of bound!"; return data[index]; }
     inline const vec2                    operator-()           const { return { -x, -y }; }
@@ -83,6 +87,7 @@ namespace graphics_math
     struct { T x, y, z; };
     struct { T r, g, b; };
 
+    inline vec3() {}
     inline vec3(const T& uniform) : x(uniform), y(uniform), z(uniform) {}
     inline vec3(const T& x, const T& y, const T& z) : x(x), y(y), z(z) {}
     inline vec3(const vec3& rhs) : x(rhs.x), y(rhs.y), z(rhs.z) {}
@@ -98,6 +103,9 @@ namespace graphics_math
     inline vec3& operator*=(const vec3& rhs) { x *= rhs.x; y *= rhs.y; z *= rhs.z; return *this; }
     inline vec3& operator*=(const    T& rhs) { x *= rhs; y *= rhs; z *= rhs; return *this; }
     inline vec3& operator/=(const    T& rhs) { x /= rhs; y /= rhs; z /= rhs; return *this; }
+
+    inline const bool operator==(const vec3& rhs) const { return x == rhs.x && y == rhs.y && z == rhs.z; }
+    inline const bool operator!=(const vec3& rhs) const { return x != rhs.x || y != rhs.y || z != rhs.z; }
 
     inline         T& operator[](const size_t index) noexcept(false) { if (index > 2) throw "index out of bound!"; return data[index]; }
     inline const vec3                    operator-()           const { return { -x, -y, -z }; }
@@ -134,6 +142,7 @@ namespace graphics_math
     struct { T x, y, z, w; };
     struct { T r, g, b, a; };
 
+    inline vec4() {}
     inline vec4(const T& uniform) : x(uniform), y(uniform), z(uniform), w(uniform) {}
     inline vec4(const T& x, const T& y, const T& z, const T& w) : x(x), y(y), z(z), w(w) {}
     inline vec4(const vec4& rhs) : x(rhs.x), y(rhs.y), z(rhs.z), w(rhs.w) {}
@@ -149,6 +158,9 @@ namespace graphics_math
     inline vec4& operator*=(const vec4& rhs) { x *= rhs.x; y *= rhs.y; z *= rhs.z; w *= rhs.w; return *this; }
     inline vec4& operator*=(const    T& rhs) { x *= rhs; y *= rhs; z *= rhs; w *= rhs; return *this; }
     inline vec4& operator/=(const    T& rhs) { x /= rhs; y /= rhs; z /= rhs; w /= rhs; return *this; }
+
+    inline const bool operator==(const vec4& rhs) const { return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w; }
+    inline const bool operator!=(const vec4& rhs) const { return x != rhs.x || y != rhs.y || z != rhs.z || w != rhs.w; }
 
     inline         T& operator[](const size_t index) noexcept(false) { if (index > 3) throw "index out of bound!"; return data[index]; }
     inline const vec4                    operator-()           const { return { -x, -y, -z, -w }; }
