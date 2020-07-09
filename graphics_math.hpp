@@ -167,7 +167,7 @@ namespace graphics_math
   template<typename T>
   inline std::ostream& operator<<(std::ostream& os, const vec4<T>& rhs)
   {
-    return os << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ", " << rhs.w ")";
+    return os << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ", " << rhs.w << ")";
   }
 
   using fvec4 = vec4<float>;
