@@ -185,3 +185,11 @@ namespace graphics_math
   using fvec4 = vec4<float>;
   using ivec4 = vec4<int>;
 }
+
+// miscellaneous
+namespace graphics_math
+{
+  float pi = 3.14159265f;
+
+  inline float degree_to_radian(float degree) { return degree * pi / 180.0f; }
+}
