@@ -91,6 +91,8 @@ namespace graphics_math
     inline vec3(const T& uniform) : x(uniform), y(uniform), z(uniform) {}
     inline vec3(const T& x, const T& y, const T& z) : x(x), y(y), z(z) {}
     inline vec3(const vec3& rhs) : x(rhs.x), y(rhs.y), z(rhs.z) {}
+    inline vec3(const vec2<T>& xy, const T& z) : x(xy.x), y(xy.y), z(z) {}
+    inline vec3(const T& x, const vec2<T>& yz) : x(x), y(yz.y), z(yz.z) {}
   
     inline const vec3 operator+(const vec3& rhs) const { return { x + rhs.x, y + rhs.y, z + rhs.z }; }
     inline const vec3 operator-(const vec3& rhs) const { return { x - rhs.x, y - rhs.y, z - rhs.z }; }
@@ -121,7 +123,6 @@ namespace graphics_math
     inline explicit operator U<V>() const { return { (V)x, (V)y, (V)z }; }
   };
 
-
   template<typename T>
   inline std::ostream& operator<<(std::ostream& os, const vec3<T>& rhs)
   {
@@ -146,6 +147,12 @@ namespace graphics_math
     inline vec4(const T& uniform) : x(uniform), y(uniform), z(uniform), w(uniform) {}
     inline vec4(const T& x, const T& y, const T& z, const T& w) : x(x), y(y), z(z), w(w) {}
     inline vec4(const vec4& rhs) : x(rhs.x), y(rhs.y), z(rhs.z), w(rhs.w) {}
+    inline vec4(const vec2<T>& xy, const T& z, const T& w) : x(xy.x), y(xy.y), z(z), w(w) {}
+    inline vec4(const T& x, const vec2<T>& yz, const T& w) : x(x), y(yz.y), z(yz.z), w(w) {}
+    inline vec4(const T& x, const T& y, const vec2<T>& zw) : x(x), y(y), z(zw.z), w(zw.w) {}
+    inline vec4(const vec2<T>& xy, const vec2<T>& zw) : x(xy.x), y(xy.y), z(zw.z), w(zw.w) {}
+    inline vec4(const vec3<T>& xyz, const T& w) : x(xyz.x), y(xyz.y), z(xyz.z), w(w) {}
+    inline vec4(const T& x, const vec3<T>& yzw) : x(x), y(yzw.y), z(yzw.z), w(yzw.w) {}
   
     inline const vec4 operator+(const vec4& rhs) const { return { x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w }; }
     inline const vec4 operator-(const vec4& rhs) const { return { x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w }; }
@@ -174,7 +181,6 @@ namespace graphics_math
     template <template<typename> class U, typename V>
     inline explicit operator U<V>() const { return { (V)x, (V)y, (V)z, (V)w }; }
   };
-
 
   template<typename T>
   inline std::ostream& operator<<(std::ostream& os, const vec4<T>& rhs)
