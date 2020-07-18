@@ -85,6 +85,8 @@ namespace graphics_math
   {
     T data[3] = { 0, 0, 0 };
     struct { T x, y, z; };
+    struct { vec2<T> xy; T z; };
+    struct { T x; vec2<T> yz; };
     struct { T r, g, b; };
 
     inline vec3() {}
@@ -141,6 +143,10 @@ namespace graphics_math
   {
     T data[4] = { 0, 0, 0, 0 };
     struct { T x, y, z, w; };
+    struct { vec2<T> xy; vec2<T> zw; };
+    struct { T x; vec2<T> yz; T w; };
+    struct { vec3<T> xyz; T w; };
+    struct { T x; vec3<T> yzw; };
     struct { T r, g, b, a; };
 
     inline vec4() {}
